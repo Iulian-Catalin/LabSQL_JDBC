@@ -3,6 +3,20 @@ public class User {
     private String username;
     private String password;
 
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    private long id;
+
+
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -29,6 +43,15 @@ public class User {
         return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", id='" + id + '\'' +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
