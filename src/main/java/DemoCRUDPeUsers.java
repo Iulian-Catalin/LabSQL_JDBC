@@ -13,16 +13,16 @@ public class DemoCRUDPeUsers {
         List result = obiect.readAllUsers();
       System.out.println(result);
 
-////        User u = new User("costica", "password1");
-////
-////        boolean isAdded = obiect.insert(u);
-////        System.out.println(isAdded);
+//        User u = new User("costica", "password1");
+//
+//        boolean isAdded = obiect.insert(u);
+//        System.out.println(isAdded);
 //
 //           List result = obiect.readAllUsersV2();
 //           System.out.println(result);
 
 
-   //     User u = new User("ionicaddf", "anaarepere1");
+//        User u = new User("costica", "anaarepere1");
 //      boolean ex = obiect.update(u);
 //
 //        System.out.println(ex);
@@ -60,7 +60,7 @@ public class DemoCRUDPeUsers {
 
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
          int val = 0; // 1
@@ -82,13 +82,13 @@ public class DemoCRUDPeUsers {
     }
 
     private List<User> readAllUsers() throws SQLException {
-        List<User> lu = new ArrayList<>();
+        List<User> usersDB = new ArrayList<>();
         // citeste din db toti userii si returneaza lista lor
 
 
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
@@ -107,10 +107,10 @@ public class DemoCRUDPeUsers {
             long id  = rs.getLong("id");
             User u = new User(user,p);
             u.setId(id);
-            lu.add(u);
+            usersDB.add(u);
 
         }
-        return lu;
+        return usersDB;
     }
 
 
@@ -121,7 +121,7 @@ public class DemoCRUDPeUsers {
 
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
@@ -156,7 +156,7 @@ public class DemoCRUDPeUsers {
 
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
@@ -179,7 +179,7 @@ public class DemoCRUDPeUsers {
         String messsage=null;
         //conectare la DB cu incarcare driver
 
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB = "postgres";
         final String PWDB = "123434yuetyeu45u7iu4w56uyt";
 
@@ -221,7 +221,7 @@ and users.id=loggedfood.iduser
 
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
@@ -255,7 +255,7 @@ and users.id=loggedfood.iduser
 
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         int val = 0; // 1
@@ -285,7 +285,7 @@ and users.id=loggedfood.iduser
         long id = -1;
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         try {
@@ -323,7 +323,7 @@ and users.id=loggedfood.iduser
         boolean isAdmin=false;
 
         // conectare la db cu incarcare driver
-        final String URLDB = "jdbc:postgresql://localhost:5432/grupajava";
+        final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
         final String USERNAMEDB ="postgres";
         final String PWDDB ="postgres";
         try {
