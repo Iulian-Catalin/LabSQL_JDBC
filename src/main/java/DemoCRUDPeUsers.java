@@ -13,7 +13,7 @@ public class DemoCRUDPeUsers {
         List result = obiect.readAllUsers();
       System.out.println(result);
 
-//        User u = new User("gigica", "password1");
+//        User u = new User("gigica2", "password1");
 //
 //        boolean isAdded = obiect.insert(u);
 //        System.out.println(isAdded);
