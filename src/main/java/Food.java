@@ -3,6 +3,10 @@ public class Food {
     private int id;
     private String foodname;
 
+    public Food(String foodname) {
+        this.foodname = foodname;
+    }
+
     public int getId() {
         return id;
     }
@@ -16,10 +20,6 @@ public class Food {
     }
 
     public void setFoodname(String foodname) {
-        this.foodname = foodname;
-    }
-
-    public Food(String foodname) {
         this.foodname = foodname;
     }
 

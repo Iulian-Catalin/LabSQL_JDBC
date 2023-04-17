@@ -11,7 +11,7 @@ public class DemoCRUDPeUsers {
         DemoCRUDPeUsers obiect = new DemoCRUDPeUsers();
 
         List result = obiect.readAllUsers();
-      System.out.println(result);
+        System.out.println(result);
 
 //        User u = new User("gigica2", "password1");
 //
@@ -28,7 +28,6 @@ public class DemoCRUDPeUsers {
 //        System.out.println(ex);
 
 
-
 //        String status = obiect.delete(u);
 //
 //        if(status.equals("0"))
@@ -40,7 +39,6 @@ public class DemoCRUDPeUsers {
 //                System.out.println(status);
 
 
-
 //        List result = obiect.readFoodOfAUser("ion");
 //           System.out.println(result);
 
@@ -50,10 +48,9 @@ public class DemoCRUDPeUsers {
 //        System.out.println(result);
     }
 
-     boolean insert (User u)  {
+    boolean insert(User u) {
 
         // COD CARE SCRIE IN DB
-
 
 
         // daca are rezultate, citirea lor
@@ -61,23 +58,21 @@ public class DemoCRUDPeUsers {
 
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
-         int val = 0; // 1
-         try {
-             Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
+        int val = 0; // 1
+        try {
+            Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
-             // rulare sql
-             PreparedStatement pSt = conn.prepareStatement("insert into users(username, password) values(?, ?)");
-             pSt.setString(1, u.getUsername());
-             pSt.setString(2, u.getPassword());
-             val = pSt.executeUpdate();
-         } catch (SQLException e) {
+            // rulare sql
+            PreparedStatement pSt = conn.prepareStatement("insert into users(username, password) values(?, ?)");
+            pSt.setString(1, u.getUsername());
+            pSt.setString(2, u.getPassword());
+            val = pSt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
-         }
-         boolean ok = false;
-        if(val!=0)
-           ok=true;
+        }
+        boolean ok = val != 0;
         return ok;
     }
 
@@ -86,11 +81,10 @@ public class DemoCRUDPeUsers {
         // citeste din db toti userii si returneaza lista lor
 
 
-
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
         // rulare sql
@@ -99,13 +93,12 @@ public class DemoCRUDPeUsers {
         ResultSet rs = pSt.executeQuery("select * from users order by username asc");
 
 
-
-        while(rs.next()) {
+        while (rs.next()) {
 
             String user = rs.getString("username").trim();
             String p = rs.getString("password").trim();
-            long id  = rs.getLong("id");
-            User u = new User(user,p);
+            long id = rs.getLong("id");
+            User u = new User(user, p);
             u.setId(id);
             usersDB.add(u);
 
@@ -119,11 +112,10 @@ public class DemoCRUDPeUsers {
         // citeste din db toti userii si returneaza lista lor
 
 
-
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
         // rulare sql
@@ -134,22 +126,20 @@ public class DemoCRUDPeUsers {
         ResultSet rs = pSt.executeQuery();
 
 
-
-        while(rs.next()) {
+        while (rs.next()) {
 
             String user = rs.getString("username").trim();
             String p = rs.getString("password").trim();
-            User u = new User(user,p);
+            User u = new User(user, p);
             lu.add(u);
 
         }
         return lu;
     }
 
-     boolean update (User u) throws SQLException {
+    boolean update(User u) throws SQLException {
 
         // COD CARE SCRIE IN DB
-
 
 
         // daca are rezultate, citirea lor
@@ -157,8 +147,8 @@ public class DemoCRUDPeUsers {
 
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
         // rulare sql
@@ -167,16 +157,14 @@ public class DemoCRUDPeUsers {
         pSt.setString(2, u.getUsername());
         int val = pSt.executeUpdate(); // 1
 
-        boolean ok = false;
-        if(val!=0)
-            ok=true;
+        boolean ok = val != 0;
         return ok;
     }
 
     private String delete(User u) {
         System.out.println("intra");
 
-        String messsage=null;
+        String messsage = null;
         //conectare la DB cu incarcare driver
 
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
@@ -192,17 +180,16 @@ public class DemoCRUDPeUsers {
             PreparedStatement pst = conn.prepareStatement("delete from users where username=?");
             pst.setString(1, u.getUsername());
             val = pst.executeUpdate();
-            messsage=String.valueOf(val);
+            messsage = String.valueOf(val);
         } catch (SQLException e) {
             e.printStackTrace();
             String m = e.getMessage();
-         if(m.contains("does not exist"))
-             messsage="There must be a connection problem. Ourt team wilsdghsft her hrt h reg";
-         else
-             if (m.contains("violates foreign key constraint"))
-                 messsage="You cannot delete this user becasue there is food registredgdfgn ret";
+            if (m.contains("does not exist"))
+                messsage = "There must be a connection problem. Ourt team wilsdghsft her hrt h reg";
+            else if (m.contains("violates foreign key constraint"))
+                messsage = "You cannot delete this user becasue there is food registredgdfgn ret";
             else
-                 messsage="General error. Our team will ... " ;
+                messsage = "General error. Our team will ... ";
 
         }
         return messsage;
@@ -219,23 +206,21 @@ and users.id=loggedfood.iduser
         // citeste din db toti userii si returneaza lista lor
 
 
-
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
         // rulare sql
         PreparedStatement pSt = conn.prepareStatement("select  foodname from loggedfood,users where users.username=? and users.id=loggedfood.iduser");
 
-         pSt.setString(1, username);
+        pSt.setString(1, username);
 
         ResultSet rs = pSt.executeQuery();
 
 
-
-        while(rs.next()) {
+        while (rs.next()) {
             String foodname = rs.getString("foodname").trim();
             Food u = new Food(foodname);
             lf.add(u);
@@ -245,10 +230,9 @@ and users.id=loggedfood.iduser
     }
 
 
-    boolean insertFoodForUserID (Food f, long id)  {
+    boolean insertFoodForUserID(Food f, long id) {
 
         // COD CARE SCRIE IN DB
-
 
 
         // daca are rezultate, citirea lor
@@ -256,8 +240,8 @@ and users.id=loggedfood.iduser
 
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         int val = 0; // 1
         try {
             Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
@@ -270,14 +254,12 @@ and users.id=loggedfood.iduser
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        boolean ok = false;
-        if(val!=0)
-            ok=true;
+        boolean ok = val != 0;
         return ok;
     }
 
 
-    long login (User u)  {
+    long login(User u) {
 
         // -1 daca nu exista , si id-ul usaerului daca exista
 
@@ -286,23 +268,23 @@ and users.id=loggedfood.iduser
 
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         try {
             Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
             // rulare sql
             PreparedStatement pSt = conn.prepareStatement("select id from users where username=? and password=? ");
 
-            pSt.setString(1,u.getUsername());
-            pSt.setString(2,u.getPassword());
+            pSt.setString(1, u.getUsername());
+            pSt.setString(2, u.getPassword());
             ResultSet rs = pSt.executeQuery();
 
 
-            while(rs.next()) {
+            while (rs.next()) {
 
                 id = rs.getLong("id");
-                 return id;
+                return id;
 
             }
         } catch (SQLException e) {
@@ -315,29 +297,29 @@ and users.id=loggedfood.iduser
     }
 
 
-    boolean isAdmin (User u)  {
+    boolean isAdmin(User u) {
 
         // -1 daca nu exista , si id-ul usaerului daca exista
 
 
-        boolean isAdmin=false;
+        boolean isAdmin = false;
 
         // conectare la db cu incarcare driver
         final String URLDB = "jdbc:postgresql://192.168.50.128:5432/postgres";
-        final String USERNAMEDB ="postgres";
-        final String PWDDB ="postgres";
+        final String USERNAMEDB = "postgres";
+        final String PWDDB = "postgres";
         try {
             Connection conn = DriverManager.getConnection(URLDB, USERNAMEDB, PWDDB);
 
             // rulare sql
             PreparedStatement pSt = conn.prepareStatement("select isadmin from users where username=? and password=? ");
 
-            pSt.setString(1,u.getUsername());
-            pSt.setString(2,u.getPassword());
+            pSt.setString(1, u.getUsername());
+            pSt.setString(2, u.getPassword());
             ResultSet rs = pSt.executeQuery();
 
 
-            while(rs.next()) {
+            while (rs.next()) {
 
                 isAdmin = rs.getBoolean("isadmin");
                 return isAdmin;
